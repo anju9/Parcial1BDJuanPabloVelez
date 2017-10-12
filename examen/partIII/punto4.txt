@@ -1,0 +1,3 @@
+
+grant dba to amartinez;
+grant connect, resource to amartinez;

@@ -1,0 +1,54 @@
+create table CATEGORIES(
+id int primary key, 
+name varchar(255), 
+season varchar (255)
+);
+
+create table PRODUCTS(
+id int primary key, 
+name varchar (255), 
+reference varchar(255), 
+price decimal(10,3),
+category_id int
+);
+
+create table ANSWERS(
+id int primary key, 
+number_of_question varchar2(255), 
+answer varchar2(255));
+
+alter table PRODUCTS
+add foreign key (category_id)
+references CATEGORIES(id);
+
+alter table PRODUCTS
+ add constraint CK_Mayores_a_cer
+ check (price>0 );
+
+ alter table CATEGORIES
+ add constraint CK_season
+ check (season in ('winter', 'summer', 'spring', 'autumn'));
+ 
+create sequence id_ANSWERS
+increment by 1
+start with 1 minvalue 1;
+
+--How many references of winter shoes are in the inventory?
+
+--select * from CATEGORIES where name like 'shoes' and season='winter';
+
+--select  * from PRODUCTS;
+
+--select * from categories c inner join PRODUCTS p on c.ID=p.category_id where c.name ='golf'  order by price;
+--select * from categories c inner join PRODUCTS p on c.ID=p.category_id where p.NAME='ligula consectetuer rhoncus.';
+
+--select * from products where name='ligula consectetuer rhoncus.';
+
+insert into ANSWERS(id,number_of_question,answer)values (id_ANSWERS.NEXTVAL,'QUESTION 1',1);
+insert into ANSWERS(id,number_of_question,answer)values (id_ANSWERS.NEXTVAL,'QUESTION 2',3);
+insert into ANSWERS(id,number_of_question,answer) values(id_ANSWERS.NEXTVAL,'QUESTION 3','8F03A38B-E011-E814-1A68-145FF0C9F7BD');
+insert into ANSWERS(id,number_of_question,answer) values(id_ANSWERS.NEXTVAL,'QUESTION 4','congue turpis. In');
+insert into ANSWERS(id,number_of_question,answer)values (id_ANSWERS.NEXTVAL,'QUESTION 5','running wear');
+
+
+

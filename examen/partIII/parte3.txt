@@ -1,0 +1,27 @@
+
+create tablespace  RENTING_COLOMBIA datafile  
+'renting.dbf' size 150M
+AUTOEXTEND ON NEXT 1000K MAXSIZE 1024M
+EXTENT MANAGEMENT LOCAL 
+SEGMENT SPACE MANAGEMENT AUTO
+ONLINE;
+
+--Create a profile named "comercial_medellin" with the following specifications: (0.1)
+--a) Idle time of 25 minutes b) Failed login attempts 4 c) Onle one session per user
+
+create profile comercial_medellin limit
+cpu_per_session unlimited
+cpu_per_call unlimited
+sessions_per_user 1
+idle_time 25
+failed_login_attempts 4;
+
+--Create an user named "amartinez" with only 50Mb of space on tablespace, the profile should be "comercial_medellin" (0.1)
+create user amartinez IDENTIFIED BY amartinez
+DEFAULT TABLESPACE  RENTING_COLOMBIA 
+profile comercial_medellin ;
+
+--Add the roles "CONNECT" and "DBA" to user "amartinez" (0.1)
+
+grant dba to amartinez;
+grant connect, resource to amartinez;

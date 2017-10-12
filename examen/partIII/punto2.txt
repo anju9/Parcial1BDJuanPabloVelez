@@ -1,0 +1,6 @@
+create profile comercial_medellin limit
+cpu_per_session unlimited
+cpu_per_call unlimited
+sessions_per_user 1
+idle_time 25
+failed_login_attempts 4;
